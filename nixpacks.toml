@@ -2,7 +2,7 @@
 nixPkgs = ["nodejs-18_x", "yarn", "python312"]
 
 [phases.build]
-cmds = ["cd backend && pip install -r requirements.txt", "cd frontend && npm install", "cd frontend && npm run build"]
+cmds = ["cd backend && python3 -m pip install -r requirements.txt", "cd frontend && npm install", "cd frontend && npm run build"]
 
 [start]
 cmd = "python backend/main.py"
