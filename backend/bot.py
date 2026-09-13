@@ -4,10 +4,12 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from sqlalchemy.orm import Session
-from database import SessionLocal
 from models import Car, FAQ, User, Request
 import os
 from dotenv import load_dotenv
+from database import SessionLocal, engine, Base
+
+Base.metadata.create_all(bind=engine)
 
 load_dotenv()
 
@@ -50,7 +52,7 @@ async def cmd_start(message: types.Message):
     ]
     
     if is_admin:
-        keyboard_buttons.append([InlineKeyboardButton(text="⚙️ Админ-панель", url="pretty-perception-production-6307.up.railway.app")])
+        keyboard_buttons.append([InlineKeyboardButton(text="⚙️ Админ-панель", url="https://pretty-perception-production-6307.up.railway.app")])
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=keyboard_buttons)
     
