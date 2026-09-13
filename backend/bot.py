@@ -8,6 +8,7 @@ from models import Car, FAQ, User, Request
 import os
 from dotenv import load_dotenv
 from database import SessionLocal, engine, Base
+from aiogram.types import WebAppInfo
 
 Base.metadata.create_all(bind=engine)
 
@@ -52,7 +53,9 @@ async def cmd_start(message: types.Message):
     ]
     
     if is_admin:
-        keyboard_buttons.append([InlineKeyboardButton(text="⚙️ Админ-панель", url="https://pretty-perception-production-6307.up.railway.app")])
+        keyboard_buttons.append([
+    InlineKeyboardButton(text="⚙️ Админ-панель", web_app=WebAppInfo(url="https://frontend-production-1bba9.up.railway.app"))
+])
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=keyboard_buttons)
     
