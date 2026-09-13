@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
@@ -6,7 +6,14 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+RUN npm run build
 
-EXPOSE 5173
+FROM node:20-alpine
 
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+WORKDIR /app
+
+RUN npm install -g serve
+
+COPY --from=build /app/dist ./dist
+
+CMD ["sh", "-c", "serve -s dist -l tcp://0.0.0.0:$PORT"]
