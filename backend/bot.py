@@ -41,7 +41,7 @@ async def cmd_start(message: types.Message):
     db.close()
     
     # Проверяем, админ ли это
-    is_admin = message.from_user.id == 8496050088 # Замени на твой Telegram ID
+    is_admin = message.from_user.id == 8496050088 
     
     keyboard_buttons = [
         [InlineKeyboardButton(text="🚗 Каталог автомобилей", callback_data="catalog")],
@@ -49,7 +49,7 @@ async def cmd_start(message: types.Message):
     ]
     
     if is_admin:
-        keyboard_buttons.append([InlineKeyboardButton(text="⚙️ Админ-панель", url="http://localhost:5174")])
+        keyboard_buttons.append([InlineKeyboardButton(text="⚙️ Админ-панель", url="pretty-perception-production-6307.up.railway.app")])
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=keyboard_buttons)
     
