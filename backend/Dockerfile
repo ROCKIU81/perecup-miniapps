@@ -1,15 +1,19 @@
-FROM python:3.12-slim
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY package*.json ./
+RUN npm install
 
 COPY . .
+RUN npm run build
 
-# Создаём директорию для базы данных
-RUN mkdir -p /app/data
+FROM node:20-alpine
 
-EXPOSE 8001
+WORKDIR /app
 
-CMD ["python", "main.py"]
+RUN npm install -g serve
+
+COPY --from=build /app/dist ./dist
+
+CMD ["sh", "-c", "serve -s dist -l tcp://0.0.0.0:$PORT"]
