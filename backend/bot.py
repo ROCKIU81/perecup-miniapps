@@ -11,8 +11,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
 
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+print("DEBUG TOKEN:", repr(BOT_TOKEN))
 logging.basicConfig(level=logging.INFO)
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
